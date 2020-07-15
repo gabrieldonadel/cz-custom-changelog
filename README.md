@@ -1,13 +1,18 @@
+<img width="100%"  src="assets/header.png">
+
 # cz-custom-changelog
 
-Status:
-[![npm version](https://img.shields.io/npm/v/cz-custom-changelog.svg?style=flat-square)](https://www.npmjs.org/package/cz-custom-changelog)
-[![npm downloads](https://img.shields.io/npm/dm/cz-custom-changelog.svg?style=flat-square)](http://npm-stat.com/charts.html?package=cz-custom-changelog&from=2015-08-01)
-[![Build Status](https://img.shields.io/travis/commitizen/cz-custom-changelog.svg?style=flat-square)](https://travis-ci.org/commitizen/cz-custom-changelog)
+[![npm package][npm-image]][npm-url] [![npm downloads](https://img.shields.io/npm/dt/rn-ticker.svg)](https://www.npmjs.com/package/rn-ticker)
+
+## Install
+
+```
+npm install -g cz-custom-changelog
+```
 
 ## Configuration
 
-This is a fork from cz-custom-changelog
+This is a fork from cz-conventional-changelog
 
 ### package.json
 
@@ -47,6 +52,7 @@ The following environment varibles can be used to override any default configura
 - CZ_TYPE = defaultType
 - CZ_SCOPE = defaultScope
 - CZ_SUBJECT = defaultSubject
+- CZ_SUBJECT_LETTER_CASE = defaultSubject
 - CZ_BODY = defaultBody
 - CZ_MAX_HEADER_WIDTH = maxHeaderWidth
 - CZ_MAX_LINE_WIDTH = maxLineWidth
@@ -54,3 +60,9 @@ The following environment varibles can be used to override any default configura
 ### Commitlint
 
 If using the [commitlint](https://github.com/custom-changelog/commitlint) js library, the "maxHeaderWidth" configuration property will default to the configuration of the "header-max-length" rule instead of the hard coded value of 100. This can be ovewritten by setting the 'maxHeaderWidth' configuration in package.json or the CZ_MAX_HEADER_WIDTH environment variable.
+
+<!-- Markdown link & img dfn's -->
+
+[npm-image]: https://img.shields.io/npm/v/cz-custom-changelog.svg?style=flat-square
+[npm-url]: https://www.npmjs.org/package/cz-custom-changelog
+[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
