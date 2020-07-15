@@ -1,41 +1,45 @@
 {
-  "name": "cz-conventional-changelog",
-  "version": "0.0.0-semantically-released.0",
+  "name": "cz-custom-changelog",
+  "version": "0.0.7",
   "description": "Commitizen adapter following the conventional-changelog format.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "commit": "git-cz",
-    "test": "mocha *.test.js",
+    "test": "mocha --require @babel/register *.test.js",
     "format": "prettier --write *.js",
-    "semantic-release": "semantic-release"
+    "prepublishOnly": "./node_modules/.bin/babel src --out-dir dist"
   },
-  "homepage": "https://github.com/commitizen/cz-conventional-changelog",
+  "homepage": "https://github.com/gabrieldonadel/cz-custom-changelog",
   "repository": {
     "type": "git",
-    "url": "https://github.com/commitizen/cz-conventional-changelog.git"
+    "url": "https://github.com/gabrieldonadel/cz-custom-changelog.git"
   },
   "engineStrict": true,
   "engines": {
     "node": ">= 10"
   },
-  "author": "Jim Cummins <jimthedev@gmail.com>",
+  "author": "Gabriel Donadel Dall'Agnol",
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.1",
     "commitizen": "^4.0.3",
     "conventional-commit-types": "^3.0.0",
-    "lodash.map": "^4.5.1",
     "longest": "^2.0.1",
     "word-wrap": "^1.0.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.5",
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.7",
     "chai": "^4.2.0",
     "cosmiconfig": "^5.2.1",
     "mocha": "^6.2.0",
     "mock-require": "^3.0.3",
-    "prettier": "^1.15.3",
+    "prettier": "^2.0.5",
     "semantic-release": "^15.13.3",
     "semver": "^6.2.0"
   },
@@ -44,7 +48,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "./index.js"
+      "path": "dist/index.js"
     }
   }
 }

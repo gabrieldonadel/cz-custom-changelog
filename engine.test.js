@@ -1,13 +1,13 @@
-var chai = require('chai');
-var chalk = require('chalk');
-var engine = require('./engine');
-var mock = require('mock-require');
-var semver = require('semver');
+import { expect as _expect, should } from 'chai';
+import { green, red } from 'chalk';
+import engine from './src/engine';
+import mock, { reRequire, stopAll } from 'mock-require';
+import { gte } from 'semver';
 
-var types = require('conventional-commit-types').types;
+import { types } from 'conventional-commit-types';
 
-var expect = chai.expect;
-chai.should();
+var expect = _expect;
+should();
 
 var defaultOptions = {
   types,
@@ -342,14 +342,14 @@ describe('transformation', function() {
         type,
         subject
       })
-    ).to.equal(chalk.green(`(${subject.length}) ${subject}`)));
+    ).to.equal(green(`(${subject.length}) ${subject}`)));
   it('long subject w/ character count', () =>
     expect(
       questionTransformation('subject', {
         type,
         subject: longBody
       })
-    ).to.equal(chalk.red(`(${longBody.length}) ${longBody}`)));
+    ).to.equal(red(`(${longBody.length}) ${longBody}`)));
 });
 
 describe('filter', function() {
@@ -382,7 +382,7 @@ describe('when', function() {
 
 describe('commitlint config header-max-length', function() {
   //commitlint config parser only supports Node 6.0.0 and higher
-  if (semver.gte(process.version, '6.0.0')) {
+  if (gte(process.version, '6.0.0')) {
     function mockOptions(headerMaxLength) {
       var options = undefined;
       mock('./engine', function(opts) {
@@ -405,23 +405,21 @@ describe('commitlint config header-max-length', function() {
         });
       }
 
-      mock.reRequire('./index');
+      reRequire('./src/index');
       try {
-        return mock
-          .reRequire('@commitlint/load')()
-          .then(function() {
-            return options;
-          });
+        return reRequire('@commitlint/load')().then(function() {
+          return options;
+        });
       } catch (err) {
         return Promise.resolve(options);
       }
     }
 
     afterEach(function() {
-      delete require.cache[require.resolve('./index')];
+      delete require.cache[require.resolve('./src/index')];
       delete require.cache[require.resolve('@commitlint/load')];
       delete process.env.CZ_MAX_HEADER_WIDTH;
-      mock.stopAll();
+      stopAll();
     });
 
     it('with no environment or commitizen config override', function() {
