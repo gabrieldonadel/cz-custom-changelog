@@ -1,5 +1,4 @@
 import wrap from 'word-wrap'
-import longest from 'longest'
 import { green, red } from 'chalk'
 
 const filter = array => array.filter(x => x)
@@ -24,7 +23,7 @@ const filterSubject = subject => {
 export default options => {
   const { types } = options
 
-  const length = longest(Object.keys(types)).length + 1
+  const length = Object.keys(types).reduce((res, x) => (x.length > res ? x.length : res), 0) + 1
 
   const choices = Object.entries(types).map(([key, type]) => ({
     name: (key + ':').padEnd(length) + ' ' + type.description,
@@ -32,25 +31,7 @@ export default options => {
   }))
 
   return {
-    // When a user runs `git cz`, prompter will
-    // be executed. We pass you cz, which currently
-    // is just an instance of inquirer.js. Using
-    // this you can ask questions and get answers.
-    //
-    // The commit callback should be executed when
-    // you're ready to send back a commit template
-    // to git.
-    //
-    // By default, we'll de-indent your commit
-    // template and will keep empty lines.
     prompter: (cz, commit) => {
-      // Let's ask some questions of the user
-      // so that we can populate our commit
-      // template.
-      //
-      // See inquirer.js docs for specifics.
-      // You can also opt to use another input
-      // collection library if you prefer.
       cz.prompt([
         {
           type: 'list',
@@ -89,9 +70,9 @@ export default options => {
                 ' characters.'
           },
           transformer: (subject, answers) => {
-            var filteredSubject = filterSubject(subject)
-            var color = filteredSubject.length <= maxSummaryLength(options, answers) ? green : red
-            return color('(' + filteredSubject.length + ') ' + subject)
+            const filteredSubject = filterSubject(subject)
+            const color = filteredSubject.length <= maxSummaryLength(options, answers) ? green : red
+            return color(`(${filteredSubject.length}) ${subject}`)
           },
           filter: filterSubject,
         },
@@ -146,7 +127,7 @@ export default options => {
           default: options.defaultIssues ? options.defaultIssues : undefined,
         },
       ]).then(answers => {
-        var wrapOptions = {
+        const wrapOptions = {
           trim: true,
           cut: false,
           newline: '\n',
@@ -155,20 +136,24 @@ export default options => {
         }
 
         // parentheses are only needed when a scope is present
-        var scope = answers.scope ? '(' + answers.scope + ')' : ''
+        const scope = answers.scope ? '(' + answers.scope + ')' : ''
 
         // Hard limit this line in the validate
-        var head = answers.type + scope + ': ' + answers.subject
+        const head = answers.type + scope + ': ' + answers.subject
 
         // Wrap these lines at options.maxLineWidth characters
-        var body = answers.body ? wrap(answers.body, wrapOptions) : false
+        const body = answers.body ? wrap(answers.body, wrapOptions) : false
 
         // Apply breaking change prefix, removing it if already present
-        var breaking = answers.breaking ? answers.breaking.trim() : ''
-        breaking = breaking ? 'BREAKING CHANGE: ' + breaking.replace(/^BREAKING CHANGE: /, '') : ''
-        breaking = breaking ? wrap(breaking, wrapOptions) : false
+        let breaking = false
+        if (answers.breaking && answers.breaking.trim()) {
+          breaking = wrap(
+            'BREAKING CHANGE: ' + answers.breaking.trim().replace(/^BREAKING CHANGE: /, ''),
+            wrapOptions
+          )
+        }
 
-        var issues = answers.issues ? wrap(answers.issues, wrapOptions) : false
+        const issues = answers.issues ? wrap(answers.issues, wrapOptions) : false
 
         commit(filter([head, body, breaking, issues]).join('\n\n'))
       })

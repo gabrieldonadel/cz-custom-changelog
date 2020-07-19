@@ -23,7 +23,6 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "commitizen": "^4.0.3",
-    "longest": "^2.0.1",
     "word-wrap": "^1.0.3"
   },
   "devDependencies": {
