@@ -1,6 +1,6 @@
 import { configLoader } from 'commitizen'
 
-import { types as _types } from './types.json'
+import _types from './types'
 import engine from './engine'
 
 const config = configLoader.load() || {}

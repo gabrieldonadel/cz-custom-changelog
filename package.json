@@ -7,7 +7,7 @@
     "commit": "git-cz",
     "test": "mocha --require @babel/register *.test.js",
     "format": "prettier --write *.js",
-    "prepublishOnly": "./node_modules/.bin/babel src --out-dir dist"
+    "prepublishOnly": "BABEL_ENV=production ./node_modules/.bin/babel src --out-dir dist"
   },
   "homepage": "https://github.com/gabrieldonadel/cz-custom-changelog",
   "repository": {
@@ -33,12 +33,12 @@
     "@babel/register": "^7.10.5",
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.7",
+    "babel-preset-minify": "^0.5.1",
     "chai": "^4.2.0",
     "cosmiconfig": "^5.2.1",
     "mocha": "^6.2.0",
     "mock-require": "^3.0.3",
     "prettier": "^2.0.5",
-    "semantic-release": "^15.13.3",
     "semver": "^6.2.0"
   },
   "optionalDependencies": {
