@@ -24,7 +24,7 @@ Like commitizen, you specify the configuration of cz-custom-changelog through th
     "config": {
         "commitizen": {
             "path": "./node_modules/cz-custom-changelog",
-            "maxHeaderWidth": 100,
+            "maxHeaderWidth": 72,
             "maxLineWidth": 100,
             "defaultType": "",
             "defaultScope": "",
