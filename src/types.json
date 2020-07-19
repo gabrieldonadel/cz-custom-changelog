@@ -29,7 +29,7 @@
       "title": "Tests"
     },
     "build": {
-      "description": "Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)",
+      "description": "Changes that affect the build system or external dependencies (example scopes: yarn, podfile, gradle)",
       "title": "Builds"
     },
     "ci": {
@@ -37,12 +37,8 @@
       "title": "Continuous Integrations"
     },
     "chore": {
-      "description": "Other changes that don't modify src or test files",
+      "description": "Small task that doesn't add value to the product",
       "title": "Chores"
-    },
-    "revert": {
-      "description": "Reverts a previous commit",
-      "title": "Reverts"
     }
   }
 }
