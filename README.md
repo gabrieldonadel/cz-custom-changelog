@@ -2,7 +2,7 @@
 
 # cz-custom-changelog
 
-[![npm package][npm-image]][npm-url] [![npm downloads](https://img.shields.io/npm/dt/rn-ticker.svg)](https://www.npmjs.com/package/rn-ticker)
+[![npm package][npm-image]][npm-url] [![npm downloads](https://img.shields.io/npm/dt/cz-custom-changelog.svg)](https://www.npmjs.com/package/cz-custom-changelog)
 
 ## Install
 
