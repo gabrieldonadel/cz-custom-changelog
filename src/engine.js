@@ -7,19 +7,6 @@ const headerLength = ({ type, scope }) => type.length + 2 + (scope ? scope.lengt
 
 const maxSummaryLength = (options, answers) => options.maxHeaderWidth - headerLength(answers)
 
-const filterSubject = subject => {
-  subject = subject.trim()
-  const firstChar = subject.charAt(0)
-  if (firstChar.toUpperCase() !== firstChar) {
-    // toUpperCase // toLowerCase
-    subject = firstChar.toUpperCase() + subject.slice(1, subject.length)
-  }
-  while (subject.endsWith('.')) {
-    subject = subject.slice(0, subject.length - 1)
-  }
-  return subject
-}
-
 export default options => {
   const { types } = options
 
@@ -29,6 +16,22 @@ export default options => {
     name: (key + ':').padEnd(length) + ' ' + type.description,
     value: key,
   }))
+
+  const filterSubject = subject => {
+    subject = subject.trim()
+    const firstChar = subject.charAt(0)
+    const transformedFirstChar = options.defaultSubjectLowerCase
+      ? firstChar.toLowerCase()
+      : firstChar.toUpperCase()
+
+    if (transformedFirstChar !== firstChar) {
+      subject = transformedFirstChar + subject.slice(1, subject.length)
+    }
+    while (subject.endsWith('.')) {
+      subject = subject.slice(0, subject.length - 1)
+    }
+    return subject
+  }
 
   return {
     prompter: (cz, commit) => {

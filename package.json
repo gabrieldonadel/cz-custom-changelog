@@ -1,6 +1,6 @@
 {
   "name": "cz-custom-changelog",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "Commitizen adapter following the conventional-changelog format.",
   "main": "dist/index.js",
   "scripts": {

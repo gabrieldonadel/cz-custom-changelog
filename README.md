@@ -7,12 +7,39 @@
 ## Install
 
 ```
-npm install -g cz-custom-changelog
+npm install -g commitizen cz-custom-changelog
+yarn global add commitizen cz-custom-changelog
 ```
 
-## Configuration
+In order to use cz-custom-changelog as an adapter on commitizen you will need to create a .czrc file on your root directory :
 
-This is a fork from cz-conventional-changelog
+```json
+{
+  "path": "cz-custom-changelog"
+}
+```
+
+## How to use it
+
+```
+git cz
+```
+
+## Custom Configuration
+
+### Environment variables
+
+The following environment varibles can be used to override any default configuration or package.json based configuration.
+
+```js
+CZ_BODY = defaultBody // ''
+CZ_MAX_HEADER_WIDTH = maxHeaderWidth // 72
+CZ_MAX_LINE_WIDTH = maxLineWidth // 100
+CZ_SCOPE = defaultScope // ''
+CZ_SUBJECT = defaultSubject // ''
+CZ_SUBJECT_LOWER_CASE = defaultSubjectLowerCase // false
+CZ_TYPE = defaultType // ''
+```
 
 ### package.json
 
@@ -45,21 +72,9 @@ Like commitizen, you specify the configuration of cz-custom-changelog through th
 }
 ```
 
-### Environment variables
-
-The following environment varibles can be used to override any default configuration or package.json based configuration.
-
-- CZ_TYPE = defaultType
-- CZ_SCOPE = defaultScope
-- CZ_SUBJECT = defaultSubject
-- CZ_SUBJECT_LETTER_CASE = defaultSubject
-- CZ_BODY = defaultBody
-- CZ_MAX_HEADER_WIDTH = maxHeaderWidth
-- CZ_MAX_LINE_WIDTH = maxLineWidth
-
 ### Commitlint
 
-If using the [commitlint](https://github.com/custom-changelog/commitlint) js library, the "maxHeaderWidth" configuration property will default to the configuration of the "header-max-length" rule instead of the hard coded value of 100. This can be ovewritten by setting the 'maxHeaderWidth' configuration in package.json or the CZ_MAX_HEADER_WIDTH environment variable.
+If using the [commitlint](https://github.com/custom-changelog/commitlint) js library, the "maxHeaderWidth" configuration property will default to the configuration of the "header-max-length" rule instead of the hard coded value of 72. This can be ovewritten by setting the 'maxHeaderWidth' configuration in package.json or the CZ_MAX_HEADER_WIDTH environment variable.
 
 <!-- Markdown link & img dfn's -->
 

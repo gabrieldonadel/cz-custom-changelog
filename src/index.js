@@ -10,6 +10,7 @@ const options = {
   defaultType: process.env.CZ_TYPE || config.defaultType,
   defaultScope: process.env.CZ_SCOPE || config.defaultScope,
   defaultSubject: process.env.CZ_SUBJECT || config.defaultSubject,
+  defaultSubjectLowerCase: process.env.CZ_SUBJECT_LOWER_CASE || config.defaultSubjectLowerCase,
   defaultBody: process.env.CZ_BODY || config.defaultBody,
   defaultIssues: process.env.CZ_ISSUES || config.defaultIssues,
   disableScopeLowerCase: process.env.DISABLE_SCOPE_LOWERCASE || config.disableScopeLowerCase,
